@@ -117,7 +117,6 @@
             //console.log('event.detail.customField-'+event.detail.customField);
             //console.log('event.detail.topic-'+event.detail.topic);
     console.log('test');
-    debugger;
             //embedded_svc.settings.extraPrechatFormDetails[2].value = "test";
             //embedded_svc.settings.extraPrechatFormDetails[1].value = "test";
             embedded_svc.settings.extraPrechatFormDetails[0].value = event.detail.Id; //"0032h00000VJ4XfAAL";
