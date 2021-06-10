@@ -1,3 +1,5 @@
+my
+
 <html lang="en">
     <head>
     </head>
@@ -66,7 +68,7 @@
 
            	embedded_svc.init(
 			'https://unify-snhu--dev.my.salesforce.com',
-			'https://dev-mysnhu.cs197.force.com/applicantportal',
+			'https://dev1-mysnhu.cs36.force.com/applicantportal',
 			gslbBaseURL,
 			'00D040000004eI2',
 			'SNHU_Web_Chat',
