@@ -1,0 +1,133 @@
+<html lang="en">
+    <head>
+    </head>
+    <body>
+    <h1>Unify QA1 Web Chat Testing</h1>
+        <style type='text/css'>
+        .embeddedServiceHelpButton .helpButton .uiButton {
+        background-color: #005290;
+        font-family: "Arial", sans-serif;
+        }
+        .embeddedServiceHelpButton .helpButton .uiButton:focus {
+        outline: 1px solid #005290;
+        }
+    </style>
+
+    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+    <script type='text/javascript'>
+            var initESW = function(gslbBaseURL) {
+            embedded_svc.settings.displayHelpButton = true; //Or false
+            embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+            embedded_svc.settings.extraPrechatFormDetails = [
+            {
+                "label":"LeadOrContactId",
+                "displayToAgent": true
+            },
+            //Modification for US#91606 [Bhawna Nawani]
+            {
+                "label":"Topic",
+                "transcriptFields":[ "Chat_Subject__c" ],
+                "displayToAgent": true
+            }];
+            console.log('setting-',embedded_svc.settings.extraPrechatFormDetails);
+            
+            //Calling Prechat API
+            embedded_svc.settings.extraPrechatInfo = [
+            {
+            "entityFieldMaps":[
+                        {"doCreate":false,"doFind":true,"fieldName":"Id","isExactMatch":true,"label":"LeadOrContactId"}],
+            "entityName":"Lead",
+            "showOnCreate": true,
+            "saveToTranscript": "LeadId"
+            },
+            {
+            "entityFieldMaps":[
+                        {"doCreate":false,"doFind":true,"fieldName":"Id","isExactMatch":true,"label":"LeadOrContactId"}],
+            "entityName":"Contact",
+            "showOnCreate": true,
+            "saveToTranscript": "ContactId"
+            }
+            ];
+            //embedded_svc.settings.defaultMinimizedText = '...'; //(Defaults to Chat with an Expert)
+            //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+
+            //embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
+            //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+
+            // Settings for Chat
+            //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+                // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+                // Returns a valid button ID.
+            //};
+            //embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
+            //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
+            //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
+
+            embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+            embedded_svc.settings.entryFeature = 'LiveAgent';
+// for QA
+           	 embedded_svc.init(
+			'https://unify-snhu--qa1.my.salesforce.com',
+			'https://qa1-mysnhu.cs198.force.com/applicantportal',
+			gslbBaseURL,
+			'00D050000004dbf',
+			'SNHU_Web_Chat',
+			{
+				baseLiveAgentContentURL: 'https://c.la2-c1cs-ia4.salesforceliveagent.com/content',
+				deploymentId: '57205000000CaUp',
+				buttonId: '57305000000CabX',
+				baseLiveAgentURL: 'https://d.la2-c1cs-ia4.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I2h000000008oEAA_179dbbafab9',
+				isOfflineSupportEnabled: false
+			}
+		);
+            };
+
+            if (!window.embedded_svc) {
+            var s = document.createElement('script');
+            s.setAttribute('src', 'https://unify-snhu--qa1.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+            s.onload = function() {
+                initESW(null);
+            };
+            document.body.appendChild(s);
+            } else {
+            initESW('https://service.force.com');
+            }
+            
+        //[Anamika-]-Added to make the chat button disappear
+        function checkAvailability() {
+            const elementEnabled = document.getElementsByClassName('uiButton helpButtonEnabled');
+            const elementDisabled = document.getElementsByClassName('uiButton helpButtonDisabled');
+            if(elementEnabled && elementEnabled.length > 0) {
+                document.getElementsByClassName('embeddedServiceHelpButton').item(0).style.display = "block";
+            }
+            if(elementDisabled && elementDisabled.length > 0) {
+                document.getElementsByClassName('embeddedServiceHelpButton').item(0).style.display = "none";
+            }     
+        }
+
+    
+        window.setInterval(function () {
+            checkAvailability();
+        }, 500);
+        //End
+        //Eventhandler to get lead id from Aura
+        document.addEventListener(
+        "setCustomField",
+        function(event) {
+            //console.log('event.detail.customField-'+event.detail.customField);
+            //console.log('event.detail.topic-'+event.detail.topic);
+    console.log('test');
+            //embedded_svc.settings.extraPrechatFormDetails[2].value = "test";
+            //embedded_svc.settings.extraPrechatFormDetails[1].value = "test";
+            embedded_svc.settings.extraPrechatFormDetails[0].value = event.detail.Id; //"0032h00000VJ4XfAAL";
+                    
+            // Fire startChat callback.
+            event.detail.callback();
+        },
+        false
+    );
+        //End of Event Handler
+    </script>
+    </body>
+    </html>
