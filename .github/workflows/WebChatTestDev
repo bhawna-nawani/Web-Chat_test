@@ -5,7 +5,7 @@
     <h1>Unify Dev Web Chat Testing</h1>
         <style type='text/css'>
         .embeddedServiceHelpButton .helpButton .uiButton {
-        background-color: #005290;
+        background-color: #ff0d15;
         font-family: "Arial", sans-serif;
         }
         .embeddedServiceHelpButton .helpButton .uiButton:focus {
@@ -47,7 +47,7 @@
             "saveToTranscript": "ContactId"
             }
             ];
-            //embedded_svc.settings.defaultMinimizedText = '...'; //(Defaults to Chat with an Expert)
+            embedded_svc.settings.defaultMinimizedText = 'Don't text'; //(Defaults to Chat with an Expert)
             //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
 
             //embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
