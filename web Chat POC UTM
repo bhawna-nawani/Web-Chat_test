@@ -137,14 +137,14 @@
             }     
         }
         document.addEventListener('chatcomponentload',(event)=>{
-	if(document.querySelector('c-pre-chat-p-o-c') != undefined){
+	if(document.querySelector('c-snhu-Apo-Web-Pre-Chat') != undefined){
 		document.querySelector('c-pre-chat-p-o-c').campaign= 'Campaign'; 
-    document.querySelector('c-pre-chat-p-o-c').source= 'Source';
-    document.querySelector('c-pre-chat-p-o-c').medium= 'Medium';
-    document.querySelector('c-pre-chat-p-o-c').content= 'Content';
-    document.querySelector('c-pre-chat-p-o-c').term= 'Term';
-    document.querySelector('c-pre-chat-p-o-c').originalFormSource= 'Original_Form_Source';
-    document.querySelector('c-pre-chat-p-o-c').googleID= 'Google_ID__c';
+    document.querySelector('c-snhu-Apo-Web-Pre-Chat').source= 'Source';
+    document.querySelector('c-snhu-Apo-Web-Pre-Chat').medium= 'Medium';
+    document.querySelector('c-snhu-Apo-Web-Pre-Chat').content= 'Content';
+    document.querySelector('c-snhu-Apo-Web-Pre-Chat').term= 'Term';
+    document.querySelector('c-snhu-Apo-Web-Pre-Chat').originalFormSource= 'Original_Form_Source';
+    document.querySelector('c-snhu-Apo-Web-Pre-Chat').googleID= 'Google_ID__c';
 		}	    
 	    })
 
