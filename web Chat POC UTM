@@ -138,7 +138,7 @@
         }
         document.addEventListener('chatcomponentload',(event)=>{
 	if(document.querySelector('c-snhu-Apo-Web-Pre-Chat') != undefined){
-		document.querySelector('c-pre-chat-p-o-c').campaign= 'Campaign'; 
+		document.querySelector('c-snhu-Apo-Web-Pre-Chat').campaign= 'Campaign'; 
     document.querySelector('c-snhu-Apo-Web-Pre-Chat').source= 'Source';
     document.querySelector('c-snhu-Apo-Web-Pre-Chat').medium= 'Medium';
     document.querySelector('c-snhu-Apo-Web-Pre-Chat').content= 'Content';
