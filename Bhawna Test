@@ -29,14 +29,14 @@
             embedded_svc.settings.extraPrechatFormDetails = [
             {
                 "label":"LeadOrContactId",
-                "transcriptFields":[ "ULIP_Returned_Lead_or_Contact_Id__c" ],
+		"transcriptFields":[ "ULIP_Returned_Lead_or_Contact_Id__c" ],
                 "displayToAgent": true
             },
-              {
+	    {
                 "label":"Email",
                 "transcriptFields":[ "Test_Email__c" ],
                 "displayToAgent": true
-            }.
+            },
             {
                 "label":"Web Topic",
                 "transcriptFields":[ "Chat_Subject__c" ],
