@@ -33,6 +33,11 @@
                 "displayToAgent": true
             },
 	    {
+                "label":"LeadOrContactId",
+		"transcriptFields":[ "ULIP_Returned_Lead_or_Contact_Id_Contact__c" ],
+                "displayToAgent": true
+            },
+	    {
                 "label":"Email",
                 "transcriptFields":[ "Test_Email__c" ],
                 "displayToAgent": true
