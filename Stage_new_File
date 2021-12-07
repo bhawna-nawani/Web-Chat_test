@@ -114,6 +114,7 @@
                 document.getElementsByClassName('embeddedServiceHelpButton').item(0).style.display = "none";
             }     
         }
+	/**--------------
         Method Description --    This method will help in the population of UTM field by passing values from 
                                  web chat to Unify.Also change the label of the  fields .
         Instructions -- Please comment or remove the labelChangeArray attribute from the parse value when no value has to be changed and vice versa.                         
