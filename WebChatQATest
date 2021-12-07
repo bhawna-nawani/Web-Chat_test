@@ -20,7 +20,6 @@
           }
     </style>
 
-    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
     <script type='text/javascript'>
           /***---------
        Method Description -- This method inserts the chat button in the DOM and controls  the population logic of few chat transcript object.
