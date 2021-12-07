@@ -76,15 +76,10 @@
                 embedded_svc.init(
 
                                     'https://unify-snhu--stage.my.salesforce.com',
-
                                     'https://stage-mysnhu.cs215.force.com/applicantportal',
-
                                     gslbBaseURL,
-
                                     '00D8B0000004eI6',
-
                                     'SNHU_Web_Chat',
-
                                     {
                                                 baseLiveAgentContentURL: 'https://c.la5-c1cs-ia4.salesforceliveagent.com/content',
                                                 deploymentId: '5723l000000leEY',
