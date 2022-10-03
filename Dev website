@@ -33,7 +33,6 @@
 		embedded_svc.settings.entryFeature = 'LiveAgent';
     embedded_svc.addEventHandler("onAvailability", function(data) {
     console.log("onAvailability event was fired. Agent availability status is " + data.isAgentAvailable ? "onlineAgentB": "offlineB");
-    //Console.log("onAvailability @@@");
 });
 embedded_svc.addEventHandler("onSettingsCallCompleted", function(data) {
     console.log("onSettingsCallCompleted event was fired. Agent availability status is " + data.isAgentAvailable ? "onlineB": "offlineB");
