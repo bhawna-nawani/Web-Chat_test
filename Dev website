@@ -37,6 +37,9 @@
 embedded_svc.addEventHandler("onSettingsCallCompleted", function(data) {
     console.log("onSettingsCallCompleted event was fired. Agent availability status is " + data.isAgentAvailable ? "onlineB": "offlineB");
 });
+embedded_svc.addEventHandler("onChatConferenceInitiated", function(data) {
+    console.log("onChatConferenceInitiated event was fired.  liveAgentSessionKey was " + data.liveAgentSessionKey);
+});
     
 		embedded_svc.init(
 			'https://unify-snhu--dev.sandbox.my.salesforce.com',
