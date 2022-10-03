@@ -32,7 +32,7 @@
 		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 		embedded_svc.settings.entryFeature = 'LiveAgent';
     embedded_svc.addEventHandler("onAvailability", function(data) {
-    console.log("onAvailability event was fired. Agent availability status is " + data.isAgentAvailable ? "online": "offline");
+    console.log("onAvailability event was fired. Agent availability status is @@ " + data.isAgentAvailable ? "onlineAgent": "offline");
 });
     
 		embedded_svc.init(
