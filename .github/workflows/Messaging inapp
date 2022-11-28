@@ -7,12 +7,12 @@
 	debugger;
 		try {
 		
-			embeddedservice_bootstrap.settings.language = 'en-US'; // For example, enter 'en' or 'en-US'
+			embeddedservice_bootstrap.settings.language = 'en'; // For example, enter 'en' or 'en-US'
 
 			embeddedservice_bootstrap.init(
 				'00D040000004eI2',
 				'TestMessagingInApp',
-				'https://unify-snhu--dev.sandbox.my.force.com/ESWTestMessagingInApp1669633630382',
+				'https://unify-snhu--dev.sandbox.my.site.com/ESWTestMessagingInApp1669633630382',
 				{
 					scrt2URL: 'https://unify-snhu--dev.sandbox.my.salesforce-scrt.com'
 				}
@@ -22,7 +22,7 @@
 		}
 	};
 </script>
-<script type='text/javascript' src='https://unify-snhu--dev.sandbox.my.force.com/ESWTestMessagingInApp1669633630382/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+<script type='text/javascript' src='https://unify-snhu--dev.sandbox.my.site.com/ESWTestMessagingInApp1669633630382/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
     </body>
     </html>
