@@ -1,28 +1,14 @@
 <html lang="en">
-    <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    </head>
     <body>
-    <h1>Unify Dev Web Chat Testing</h1>
-        <style type='text/css'>
-        .embeddedServiceHelpButton .helpButton .uiButton {
-        background-color: #005290;
-        font-family: "Arial", sans-serif;
-        }
-        .embeddedServiceHelpButton .helpButton .uiButton:focus {
-        outline: 1px solid #005290;
-        }
-    </style>
-
     <script type='text/javascript'>
 	function initEmbeddedMessaging() {
 		try {
-			embeddedservice_bootstrap.settings.language = 'en';
+			embeddedservice_bootstrap.settings.language = ''; // For example, enter 'en' or 'en-US'
 
 			embeddedservice_bootstrap.init(
 				'00D040000004eI2',
-				'SNHU_Messaging_in_app_and_web',
-				'https://unify-snhu--dev.sandbox.my.site.com/ESWSNHUMessaginginapp1669136110432',
+				'TestMessagingInApp',
+				'https://unify-snhu--dev.sandbox.my.site.com/ESWTestMessagingInApp1669633630382',
 				{
 					scrt2URL: 'https://unify-snhu--dev.sandbox.my.salesforce-scrt.com'
 				}
@@ -32,7 +18,7 @@
 		}
 	};
 </script>
-<script type='text/javascript' src='https://unify-snhu--dev.sandbox.my.site.com/ESWSNHUMessaginginapp1669136110432/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+<script type='text/javascript' src='https://unify-snhu--dev.sandbox.my.site.com/ESWTestMessagingInApp1669633630382/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
     </body>
     </html>
