@@ -1,0 +1,181 @@
+<html>
+  <body>
+     <!--
+      Instructions - The CSS mentioned in the file is just for refrence please use the same CSS as used in Variation-3 and variation 4 page   
+
+    -->  
+    <style type='text/css'>
+      .embeddedServiceHelpButton .helpButton .uiButton {
+        background-color: #005290;
+        font-family: "Arial", sans-serif;
+      }
+      .embeddedServiceHelpButton .helpButton .uiButton:focus {
+        outline: 1px solid #005290;
+      }
+      	.embeddedServiceHelpButton .helpButton {
+            position: fixed;
+            bottom: 35%;
+            transform: rotate(270deg);
+            width: 2%;
+          }
+    </style>
+
+    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+    <script type='text/javascript'>
+          /***---------
+       Method Description -- This method inserts the chat button in the DOM and controls  the population logic of few chat transcript object.
+      ---------***/
+        var initESW = function(gslbBaseURL) {
+            embedded_svc.settings.displayHelpButton = true; //Or false
+        embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+        /**
+        embedded_svc.settings.defaultMinimizedText - use this to populate the text on the chat button please 
+        **/
+        embedded_svc.settings.defaultMinimizedText = 'Chat'; //(Defaults to Chat with an Expert)
+        //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+
+        //embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
+        //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+
+        // Settings for Chat
+        
+        embedded_svc.settings.extraPrechatFormDetails = [
+            {
+                "label":"LeadOrContactId",
+                "displayToAgent": true
+            },
+            {
+                "label":"Web Topic",
+                "transcriptFields":[ "Chat_Subject__c" ],
+                "displayToAgent": true
+            }];
+        
+        embedded_svc.settings.extraPrechatInfo = [
+            {
+            "entityFieldMaps":[
+                {"doCreate":false,"doFind":true,"fieldName":"Id","isExactMatch":true,"label":"LeadOrContactId"}],
+            "entityName":"Lead",
+            "showOnCreate": true,
+            "saveToTranscript": "LeadId"
+            },
+            {
+            "entityFieldMaps":[
+                {
+		"doCreate":false,
+		"doFind":false,
+		"fieldName":"LastName",
+		"isExactMatch":false,
+		"label":"Last Name"
+	  }, {
+		"doCreate":false,
+		"doFind":false,
+		"fieldName":"FirstName",
+		"isExactMatch":false,
+		"label":"First Name"
+	  }, {
+		"doCreate":false,
+		"doFind":false,
+		"fieldName":"Email",
+		"isExactMatch":true,
+		"label":"Email"
+	  },
+        {"doCreate":false,"doFind":true,"fieldName":"Id","isExactMatch":true,"label":"LeadOrContactId"}],
+            "entityName":"Contact",
+            "showOnCreate": true,
+            "saveToTranscript": "ContactId"
+        }
+            ];
+
+        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+        embedded_svc.settings.entryFeature = 'LiveAgent';
+    
+            embedded_svc.init('https://unify-snhu--dev.sandbox.my.salesforce.com',
+			'https://admissiondev.snhu.edu/',
+			gslbBaseURL,
+			'00D040000004eI2',
+			'SNHU_Web_Chat',
+			{
+				baseLiveAgentContentURL: 'https://c.la3-c1cs-ia4.salesforceliveagent.com/content',
+				deploymentId: '572040000008OK6',
+				buttonId: '573040000008OPV',
+				baseLiveAgentURL: 'https://d.la3-c1cs-ia4.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I2h000000008oEAA_179dbbafab9',
+				isOfflineSupportEnabled: false
+			}
+            );
+        };
+    
+        if (!window.embedded_svc) {
+            var s = document.createElement('script');
+            s.setAttribute('src', 'https://unify-snhu--dev.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+            s.onload = function() {
+                initESW(null);
+            };
+            document.body.appendChild(s);
+        } else {
+            initESW('https://service.force.com');
+        }
+        
+        embedded_svc.settings.autoOpenPostChat=false;
+
+
+    
+      
+      /**--------------
+      Method Description - This method will be used to display and hide the chat button based on availability of the agent.
+                           If no agent is available chat button will not get displayed.
+      -----------------**/
+       window.setInterval(function () {
+            checkAvailability();		
+        }, 500);
+        function checkAvailability() {
+            const elementEnabled = document.getElementsByClassName('uiButton helpButtonEnabled');
+            const elementDisabled = document.getElementsByClassName('uiButton helpButtonDisabled');
+            if(elementEnabled && elementEnabled.length > 0) {
+                document.getElementsByClassName('embeddedServiceHelpButton').item(0).style.display = "block";
+            }
+            if(elementDisabled && elementDisabled.length > 0) {
+                document.getElementsByClassName('embeddedServiceHelpButton').item(0).style.display = "none";
+            }     
+        }
+        //------------------------------------------
+        
+        /**------------------------
+        Method Description - This function will listen to the even fired by the LWC component and fetch the id from webservice and pass it to prechat API 
+                             and initiate the chat.
+        ---------------------------**/
+        document.addEventListener("setCustomField",function(event) {
+            embedded_svc.settings.extraPrechatFormDetails[0].value = event.detail.Id; //;         
+            event.detail.callback();
+        },
+        false
+        );
+        //------------------------------
+        /***-----------------------------
+        Method Description --    This method will help in the population of UTM field by passing values from 
+                                 web chat to Unify.Also change the label of the  fields .
+        Instructions -- Please comment or remove the labelChangeArray attribute from the parse value when no value has to be changed and vice versa.                         
+        --------------------------------***/
+        //let chatBoxTrackingParams={};
+	let cbTrackerValues = chatBoxTrackingParams.getCookieValues();
+       var parseValue ={
+			  "fieldpopulation": {
+			      "campaign": (cbTrackerValues['utm_campaign'] !== undefined) ? cbTrackerValues['utm_campaign']  : '',
+                              "source": (cbTrackerValues['utm_source'] !== undefined) ? cbTrackerValues['utm_source']  : '',
+                              "medium": (cbTrackerValues['utm_medium'] !== undefined) ? cbTrackerValues['utm_medium']  : '',
+                              "content": (cbTrackerValues['utm_content'] !== undefined) ? cbTrackerValues['utm_content']  : '',
+                              "utm_term": (cbTrackerValues['utm_term'] !== undefined) ? cbTrackerValues['utm_term']  : '',
+                              "gclientid": (cbTrackerValues['Google_ID__c'] !== undefined) ? cbTrackerValues['Google_ID__c']  : '',
+                              "landingPage": (cbTrackerValues['Landing_Page'] !== undefined) ? cbTrackerValues['Landing_Page']  : '',
+                              "referrer": (cbTrackerValues['Referrer'] !== undefined) ? cbTrackerValues['Referrer']  : ''
+			                      },
+         		 "labelChangeArray": [{
+						"newlabel": "Questions/Comments",
+                  				"oldlabel": "Details Field"
+					     }]
+			   }
+	    window.name = JSON.stringify(parseValue);
+      
+      </script>
+    </body>
+</html>
